@@ -16,41 +16,38 @@
             text-align: center;
             background-color: #f0f0f0;
             position: relative;
-        }
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            z-index: 2;
+            overflow: hidden;
         }
 
         h1 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem); /* Ajuste dinâmico do tamanho */
-            margin-bottom: 1rem;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
         p {
-            font-size: clamp(1.25rem, 3vw, 2rem);
+            font-size: 2em;
         }
 
         .button-container {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
             position: relative;
+            width: 100%;
+            flex-wrap: wrap; /* Permite que os botões fiquem em linhas diferentes */
         }
 
         button {
-            padding: 0.75rem 1.5rem;
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            padding: 20px 40px;
+            font-size: 1.5em;
             cursor: pointer;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 10px;
             background-color: #007bff;
             color: white;
             transition: background-color 0.3s ease;
+            position: relative;
         }
 
         button:hover {
@@ -91,15 +88,14 @@
             }
         }
 
-        #cat-image {
-            width: 20%;
-            max-width: 250px;
+        img {
+            width: 250px;
+            height: auto;
             position: absolute;
             display: none;
-            top: 10%;
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
-            animation: bounce 1s ease infinite;
         }
 
         @keyframes bounce {
@@ -113,89 +109,40 @@
                 transform: translateY(0);
             }
         }
-
-        body.background-active {
-            background-image: url('images/borda-de-girassol-de-design-plano-com-espaco-de-copia_23-2148979244-Photoroom.png');
-            background-position: bottom;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .highlight-text {
-            font-size: clamp(2rem, 5vw, 3rem);
-            color: white;
-        }
     </style>
 </head>
 <body>
-    <audio id="background-music" loop autoplay>
-        <source src="images/musica.mp3" type="audio/mp3">
-    </audio>
-
-    <div class="content">
+    <div>
         <h1>Querida Maira Raquel, você está convidada para um jantar amanhã à noite!</h1>
         <p id="question">Aceita?</p>
         <div class="button-container" id="buttons">
             <button id="yes">Sim</button>
             <button id="no">Não</button>
         </div>
-
-        <div id="message"></div>
+        <div id="fireworks"></div>
+        <img src="images/jesse.jpg" id="cat-image" alt="Cat Image">
     </div>
-    <div id="fireworks"></div>
-    <img src="images/jesse.jpg" id="cat-image" alt="Cat Image">
 
     <script>
         const yesButton = document.getElementById('yes');
         const noButton = document.getElementById('no');
         const buttonsContainer = document.getElementById('buttons');
-        const message = document.getElementById('message');
         const fireworks = document.getElementById('fireworks');
-        const question = document.getElementById('question');
         const catImage = document.getElementById('cat-image');
 
         yesButton.addEventListener('click', () => {
-            message.innerHTML = "<h2 class='highlight-text'>Fechou, marcado para 19/09/2024 às 19:30!</h2>";
-            buttonsContainer.classList.add('hidden');
-            question.innerHTML = "<span class='highlight-text'>Aí sim</span>";
-            document.body.classList.add('background-active');
-            showFireworks();
+            alert('Fechou, marcado para 19/09/2024 às 19:30!');
         });
 
         noButton.addEventListener('mouseover', () => {
             const maxX = window.innerWidth - noButton.offsetWidth;
             const maxY = window.innerHeight - noButton.offsetHeight;
-            const moveX = Math.random() * maxX;
-            const moveY = Math.random() * maxY;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
 
-            noButton.style.left = Math.min(Math.max(moveX, 0), maxX) + 'px';
-            noButton.style.top = Math.min(Math.max(moveY, 0), maxY) + 'px';
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
         });
-
-        function showFireworks() {
-            fireworks.style.display = 'block';
-
-            for (let i = 0; i < 50; i++) {
-                const firework = document.createElement('div');
-                firework.classList.add('firework');
-                firework.style.left = Math.random() * window.innerWidth + 'px';
-                firework.style.top = Math.random() * window.innerHeight + 'px';
-                fireworks.appendChild(firework);
-
-                setTimeout(() => {
-                    firework.remove();
-                }, 2750);
-            }
-
-            setTimeout(() => {
-                fireworks.style.display = 'none';
-                showCatImage();
-            }, 2800);
-        }
-
-        function showCatImage() {
-            catImage.style.display = 'block';
-        }
     </script>
 </body>
 </html>
