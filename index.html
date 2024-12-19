@@ -1,94 +1,160 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite para Jantar</title>
+    <title>Para Maira</title>
     <style>
+        /* Estilização do corpo da página */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh; /* Ocupa a altura total da tela */
             margin: 0;
-            padding: 0;
+            text-align: center;
+            background-color: #f0f0f0;
+            position: relative;
         }
 
+        /* Estilo da div que contém todo o conteúdo central */
         .content {
-            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* Espaço entre os elementos */
+            z-index: 2; /* Garanta que esteja na frente de outros elementos */
         }
 
-        .highlight-text {
-            color: #ff6347; /* Tom de vermelho */
-            font-weight: bold;
+        /* Estilo do título */
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
+        /* Estilo do parágrafo */
+        p {
+            font-size: 2em;
+        }
+
+        /* Contêiner para os botões */
         .button-container {
+            display: flex;
+            gap: 20px; /* Espaçamento entre os botões */
             margin-top: 20px;
+            position: relative;
         }
 
+        /* Estilo dos botões */
         button {
-            font-size: 18px;
-            padding: 10px 20px;
-            margin: 10px;
+            padding: 20px 40px;
+            font-size: 1.5em;
             cursor: pointer;
             border: none;
-            background-color: #ff6347;
+            border-radius: 10px;
+            background-color: #007bff; /* Cor de fundo azul */
             color: white;
-            border-radius: 5px;
+            transition: background-color 0.3s ease; /* Efeito de transição ao passar o mouse */
         }
 
+        /* Cor de fundo do botão ao passar o mouse */
         button:hover {
-            background-color: #ff4500;
+            background-color: #0056b3;
         }
 
+        /* Classe escondida para esconder elementos (usada para esconder os botões após clicar em "Sim") */
         .hidden {
             display: none;
         }
 
+        /* Botão "Não" posicionado de forma relativa para movimentação */
+        #no {
+            position: relative;
+        }
+
+        /* Estilização da div que conterá os fogos de artifício */
         #fireworks {
-            position: absolute;
+            display: none; /* Inicia oculto */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            display: none;
+            background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro translúcido */
+            z-index: 1000; /* Prioridade máxima de sobreposição */
         }
 
+        /* Estilo individual para cada fogo de artifício */
         .firework {
-            position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #ff6347;
-            border-radius: 50%;
-            animation: explode 2s forwards;
+            background-color: white;
+            position: absolute;
+            border-radius: 50%; /* Forma de círculo */
+            animation: explode 1s ease-in-out infinite; /* Animação de explosão */
         }
 
+        /* Animação de expansão para os fogos */
         @keyframes explode {
             0% {
-                transform: scale(1);
-                opacity: 1;
+                transform: scale(0);
             }
             100% {
-                transform: scale(3);
+                transform: scale(5);
                 opacity: 0;
             }
         }
 
+        /* Estilização da imagem do gato */
         #cat-image {
-            display: none;
-            width: 200px;
-            margin-top: 20px;
+            width: 250px;
+            height: auto;
+            position: absolute;
+            display: none; /* Começa oculta */
+            top: 50px;
+            left: 40%; /* Centralizado horizontalmente */
+            transform: translateX(-50%);
+            animation: bounce 1s ease infinite; /* Animação de "pular" */
         }
 
-        .background-active {
-            background-image: url('images/sunflowers.jpg');
-            background-size: cover;
-            background-position: center;
+        /* Animação de pulo para a imagem do gato */
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            65% {
+                transform: translateY(-30px); /* Sobe e desce */
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
+
+        /* Estilo para o plano de fundo ativo */
+        body.background-active {
+            background-image: url('images/borda-de-girassol-de-design-plano-com-espaco-de-copia_23-2148979244-Photoroom.png');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Texto destacado com fonte maior e cor branca */
+        .highlight-text {
+            font-size: 3em;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
+    <!-- Música de fundo -->
+    <audio id="background-music" autoplay loop>
+        <source src="images/musica.mp3" type="audio/mpeg"> <!-- Substitua pelo caminho do arquivo de música -->
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
     <!-- Conteúdo principal -->
     <div class="content">
         <h1>Querida Maira Raquel, você está convidada para um jantar amanhã à noite!</h1>
@@ -104,12 +170,6 @@
 
     <!-- Imagem do gato -->
     <img src="images/jesse.jpg" id="cat-image" alt="Cat Image">
-
-    <!-- Música de fundo -->
-    <audio id="background-music" autoplay loop>
-        <source src="images/musica.mp3" type="audio/mp3">
-        Seu navegador não suporta a tag de áudio.
-    </audio>
 
     <script>
         // Seleção dos elementos principais do HTML para interação
@@ -134,8 +194,8 @@
         noButton.addEventListener('mouseover', () => {
             const maxX = window.innerWidth - noButton.offsetWidth - 10; // Limita o movimento dentro da janela
             const maxY = window.innerHeight - noButton.offsetHeight - 10;
-            const moveX = Math.random() * 20 - 10; // Movimento aleatório no eixo X
-            const moveY = Math.random() * 20 - 10; // Movimento aleatório no eixo Y
+            const moveX = Math.random() * 100 - 50; // Movimento aleatório no eixo X
+            const moveY = Math.random() * 100 - 50; // Movimento aleatório no eixo Y
 
             const newX = Math.max(0, Math.min(noButton.offsetLeft + moveX, maxX)); // Calcula a nova posição X
             const newY = Math.max(0, Math.min(noButton.offsetTop + moveY, maxY));  // Calcula a nova posição Y
