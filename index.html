@@ -17,6 +17,7 @@
             text-align: center;
             background-color: #f0f0f0;
             position: relative;
+            overflow: hidden; /* Para evitar barras de rolagem */
         }
 
         /* Estilo da div que contém todo o conteúdo central */
@@ -26,25 +27,28 @@
             align-items: center;
             gap: 20px; /* Espaço entre os elementos */
             z-index: 2; /* Garanta que esteja na frente de outros elementos */
+            padding: 10px;
+            max-width: 90%; /* Garantir que o conteúdo não ultrapasse a largura da tela */
         }
 
         /* Estilo do título */
         h1 {
-            font-size: 2.5em;
+            font-size: 5vw; /* Tamanho do texto ajustável baseado na largura da tela */
             margin-bottom: 20px;
         }
 
         /* Estilo do parágrafo */
         p {
-            font-size: 2em;
+            font-size: 3vw; /* Tamanho ajustável baseado na largura da tela */
         }
 
         /* Contêiner para os botões */
         .button-container {
             display: flex;
+            flex-wrap: wrap; /* Permite que os botões se movam para a linha seguinte se necessário */
+            justify-content: center;
             gap: 20px; /* Espaçamento entre os botões */
             margin-top: 20px;
-            position: relative;
         }
 
         /* Estilo dos botões */
@@ -57,6 +61,8 @@
             background-color: #007bff; /* Cor de fundo azul */
             color: white;
             transition: background-color 0.3s ease; /* Efeito de transição ao passar o mouse */
+            min-width: 150px; /* Tamanho mínimo dos botões */
+            text-align: center;
         }
 
         /* Cor de fundo do botão ao passar o mouse */
@@ -109,12 +115,12 @@
 
         /* Estilização da imagem do gato */
         #cat-image {
-            width: 250px;
+            width: 25vw; /* Largura ajustada para ser uma porcentagem da largura da tela */
             height: auto;
             position: absolute;
             display: none; /* Começa oculta */
             top: 50px;
-            left: 40%; /* Centralizado horizontalmente */
+            left: 50%; /* Centralizado horizontalmente */
             transform: translateX(-50%);
             animation: bounce 1s ease infinite; /* Animação de "pular" */
         }
@@ -142,8 +148,28 @@
 
         /* Texto destacado com fonte maior e cor branca */
         .highlight-text {
-            font-size: 3em;
+            font-size: 4vw; /* Fonte ajustável conforme a tela */
             color: white;
+        }
+
+        /* Estilos para telas menores */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 6vw;
+            }
+
+            p {
+                font-size: 4vw;
+            }
+
+            button {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+
+            #cat-image {
+                width: 40vw;
+            }
         }
 
     </style>
