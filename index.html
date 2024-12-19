@@ -150,9 +150,9 @@
 </head>
 <body>
     <!-- Música de fundo -->
-    <audio id="background-music" autoplay loop>
-        <source src="images/musica.mp3" type="audio/mpeg"> <!-- Substitua pelo caminho do arquivo de música -->
-        Seu navegador não suporta o elemento de áudio.
+    <audio id="background-music" loop autoplay>
+        <source src="images/musica.mp3" type="audio/mp3">
+        Seu navegador não suporta o formato de áudio.
     </audio>
 
     <!-- Conteúdo principal -->
@@ -180,6 +180,7 @@
         const fireworks = document.getElementById('fireworks');
         const question = document.getElementById('question');
         const catImage = document.getElementById('cat-image');
+        const music = document.getElementById('background-music'); // Referência ao áudio
 
         // Evento ao clicar no botão "Sim"
         yesButton.addEventListener('click', () => {
